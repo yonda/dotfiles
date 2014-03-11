@@ -1,0 +1,38 @@
+[user]
+	name = yonda
+	email = honda@33i.co.jp
+[core]
+	excludesfile = /Users/yohei/.gitignore_global
+[color]
+	ui = auto
+[push]
+	default = tracking       # defaultのpush先はtrackingしているリポジトリ
+[pull]
+	rebase = true
+[alias]
+	au = add -u
+	dc = diff --cached
+	ds = diff --stat
+	dm = diff origin/master head
+	dp = diff head^ head
+	co = checkout
+	ci = commit -v
+	ca = commit --amend
+	cm = commit -m
+	st = status
+	lo = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+	# mergeの際にconflictが起きたファイルを編集
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+	f = fetch
+	ft = fetch --tags
+	rh = reset head^
+	ss = stash save
+	sp = stash pop
+	b = branch
+	bd = branch -D
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
