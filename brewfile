@@ -1,0 +1,47 @@
+tap homebrew/versions|| true
+
+# development
+
+## brew-cask
+tap phinze/homebrew-cask || true
+install brew-cask || true
+install openssl || true
+install readline || true
+install libyaml || true
+install autoconf || true
+
+## ruby
+install rbenv || true
+install ruby-build || true
+
+## mysql
+install mysql55 || true
+
+## redis
+install redis || true
+install phantomjs || true
+install imagemagick || true
+
+## virtual
+cask install virtualbox || true
+cask install vagrant || true
+
+## security
+cask install clamxav
+
+# personal
+
+## general
+cask install google-chrome || true
+cask install firefox || true
+cask install kobito || true
+cask install skype || true
+cask install dropbox || true
+cask install skitch || true
+
+## dev
+cask install iterm2 || true
+install tmux || true
+install gist || true
+install mongodb || true
+
