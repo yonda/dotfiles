@@ -26,6 +26,9 @@ install imagemagick || true
 cask install virtualbox || true
 cask install vagrant || true
 
+# other
+install npm || true
+
 ## security
 cask install clamxav
 
@@ -38,6 +41,7 @@ cask install kobito || true
 cask install skype || true
 cask install dropbox || true
 cask install skitch || true
+cask install macvim || true
 
 ## dev
 cask install iterm2 || true
