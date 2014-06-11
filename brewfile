@@ -9,6 +9,7 @@ install openssl || true
 install readline || true
 install libyaml || true
 install autoconf || true
+install ack || true
 
 ## ruby
 install rbenv || true
