@@ -27,7 +27,7 @@ install imagemagick || true
 cask install virtualbox || true
 cask install vagrant || true
 install docker || true
-install boot2docker || true
+cask boot2docker || true
 
 # other
 install npm || true
