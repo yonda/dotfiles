@@ -31,6 +31,7 @@ cask boot2docker || true
 
 # other
 install npm || true
+install ansible || true
 
 ## security
 cask install clamxav
