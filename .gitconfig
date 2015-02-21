@@ -2,7 +2,7 @@
 	name = yonda
 	email = honda@33i.co.jp
 [core]
-	excludesfile = /Users/yonda/.gitignore
+	excludesfile = ~/.gitignore
 [color]
 	ui = auto
 [push]

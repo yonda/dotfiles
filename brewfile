@@ -53,3 +53,4 @@ install tmux || true
 install gist || true
 install mongodb || true
 
+install peco || true
