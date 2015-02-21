@@ -1,4 +1,6 @@
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:$PATH"
+export PATH="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/:$PATH"
 eval "$(rbenv init -)"
 
 # env
@@ -17,6 +19,27 @@ alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 alias g='git'
 alias gs='git st'
 alias gl='git lo'
+alias gh='git hf'
+
+alias dd='pretty-diff'
+alias show='git se'
+
+alias va='vagrant'
+
+alias pfdes='ssh -L 13389:10.38.56.101:3389 gees-production-gateway'
+alias routeadd='sudo route add -net 172.20.0.0/16 10.33.1.40'
+
+# cd-bookmark
+autoload -Uz cd-bookmark
+alias cb='cd-bookmark'
+
+# HISTFILE
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
+# bindkey
+bindkey -e
 
 # prompt
 setopt prompt_subst
@@ -26,6 +49,16 @@ autoload -Uz colors
 colors
 autoload -Uz add-zsh-hook
 
+# go
+
+export GOPATH=$HOME/.go
+export PATH=$PATH:$HOME/.go/bin
+
+function p() { peco | while read LINE; do $@ $LINE; done }
+alias e='ghq list -p | p cd'
+alias en='ghq list -p | p cd; show'
+alias c='g br | peco | xargs git checkout'
+
 # for vcs_info
 function _precmd_vcs_info() {
   LANG=en_US.UTF-8 vcs_info
@@ -34,6 +67,8 @@ add-zsh-hook precmd _precmd_vcs_info
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats "%b" "%s"
 zstyle ':vcs_info:*' actionformats "%b|%a" "%s"
+# 大文字小文字を区別しない
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 function vcs_info_for_git() {
   VCS_GIT_PROMPT="${vcs_info_msg_0_}"
@@ -92,7 +127,9 @@ function vcs_info_with_color() {
   fi
 }
 
-PROMPT=$'%{$fg[red]%}@%M %{$fg[cyan]%}%~ %(?.%?.%F{red}%?%f) $(vcs_info_with_color)   \n %{${fg[yellow]}%}$%{${reset_color}%} '
+function git(){hub "$@"}
+
+PROMPT=$'%{$fg[red]%}@%n %{$fg[cyan]%}%~ $(vcs_info_with_color)   \n %{${fg[yellow]}%}$%{${reset_color}%} '
 RPROMPT=''
 
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
