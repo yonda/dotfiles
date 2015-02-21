@@ -2,7 +2,7 @@
 	name = yonda
 	email = honda@33i.co.jp
 [core]
-	excludesfile = /Users/yohei/.gitignore_global
+	excludesfile = /Users/yonda/.gitignore
 [color]
 	ui = auto
 [push]
@@ -10,29 +10,81 @@
 [pull]
 	rebase = true
 [alias]
-	au = add -u
+	# diff
 	dc = diff --cached
+	d  = diff
 	ds = diff --stat
 	dm = diff origin/master head
-	dp = diff head^ head
+	dh = diff head^ head
+
+	# checkout
 	co = checkout
+	cb = checkout -b
+	com = checkout master
+
+	# commit
 	ci = commit -v
 	ca = commit --amend
 	cm = commit -m
+
+	# grep
+	gl = grep --line-number --show-function --color --heading --break
+
+	# misc
 	st = status
-	lo = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-	# mergeの際にconflictが起きたファイルを編集
-	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
-	f = fetch
-	ft = fetch --tags
+	ls = ls-files
 	rh = reset head^
+	au = add -u
+	pl = pull
+	pu = push
+	ad = add
+
+	# log
+	lo = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+	lp = log -p
+
+	# fetch
+	f  = fetch
+	ft = fetch --tags
+	fp = fetch --prune
+
+	# rebase
+	r = rebase
+	rem = rebase origin/master
+	rec = rebase --continue
+	rea = rebase --abort
+
+	# stash
 	ss = stash save
 	sp = stash pop
+
+	# branch
 	b = branch
 	bd = branch -D
+	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+
+	# hub
+	se = browse # browse github page
+
+	# hubflow
+	feature = hf feature
+	hotfix = hf hotfix
+
+	# mergeの際にconflictが起きたファイルを編集
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+
+	cl = clean
+
+	# cherry-pick
+	chp = cherry-pick
+
+[difftool "pretty-diff"]
+	cmd = pretty-diff \"$LOCAL\" \"$REMOTE\"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[ghq]
+	root = ~/work/op_gees_box/src
+	root = ~/work
