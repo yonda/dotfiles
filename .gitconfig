@@ -2,7 +2,7 @@
 	name = yonda
 	email = honda@33i.co.jp
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/yonda/.gitignore
 [color]
 	ui = auto
 [push]
@@ -14,7 +14,7 @@
 	dc = diff --cached
 	d  = diff
 	ds = diff --stat
-	dm = diff origin/master head
+	dd = diff origin/develop head
 	dh = diff head^ head
 
 	# checkout
@@ -37,6 +37,7 @@
 	au = add -u
 	pl = pull
 	pu = push
+	pf = push -f
 	ad = add
 
 	# log
@@ -44,9 +45,8 @@
 	lp = log -p
 
 	# fetch
-	f  = fetch
+	f = fetch --prune
 	ft = fetch --tags
-	fp = fetch --prune
 
 	# rebase
 	r = rebase
@@ -61,7 +61,7 @@
 	# branch
 	b = branch
 	bd = branch -D
-	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+	dmb = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
 
 	# hub
 	se = browse # browse github page

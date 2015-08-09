@@ -1,7 +1,15 @@
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:$PATH"
 export PATH="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/:$PATH"
+export PATH=$PATH:/usr/local/share/python
 eval "$(rbenv init -)"
+
+# oracle
+export DYLD_LIBRARY_PATH=~/opt/oracle/instantclient_11_2
+export ORACLE_HOME=/Users/yonda/opt/oracle/instantclient_11_2
+export TNS_ADMIN=$ORACLE_HOME/network/admin/tnsnames.ora
+export ORACLE_SID=BIZCARD
+export NLS_LANG=Japanese_Japan.AL32UTF8
 
 # env
 
@@ -11,6 +19,8 @@ export EDITOR=vim
 alias ls="ls -FG"
 alias la='ls -al'
 alias b='bundle'
+alias bo='bundle open'
+alias bc='bundle console'
 alias be='bundle exec'
 alias bi='bundle install'
 alias bo='bundle open'
@@ -25,13 +35,6 @@ alias dd='pretty-diff'
 alias show='git se'
 
 alias va='vagrant'
-
-alias pfdes='ssh -L 13389:10.38.56.101:3389 gees-production-gateway'
-alias routeadd='sudo route add -net 172.20.0.0/16 10.33.1.40'
-
-# cd-bookmark
-autoload -Uz cd-bookmark
-alias cb='cd-bookmark'
 
 # HISTFILE
 HISTFILE=~/.zsh_history
@@ -55,6 +58,8 @@ export GOPATH=$HOME/.go
 export PATH=$PATH:$HOME/.go/bin
 
 function p() { peco | while read LINE; do $@ $LINE; done }
+
+## alias
 alias e='ghq list -p | p cd'
 alias en='ghq list -p | p cd; show'
 alias c='g br | peco | xargs git checkout'
@@ -136,3 +141,5 @@ fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 
 autoload -U compinit
 compinit -u
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
