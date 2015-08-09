@@ -1,5 +1,6 @@
 " vi互換の動作を無効にするおまじない
 set nocompatible
+
 filetype off
 filetype plugin indent off
 
@@ -39,9 +40,9 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 
 " バッファ一覧
-" noremap <C-P> :Unite buffer<CR>
+noremap <C-B> :Unite buffer<CR>
 " ファイル一覧
-" noremap <C-N> :Unite -buffer-name=file file<CR>
+noremap <C-F> :Unite -buffer-name=file file<CR>
 " 最近使ったファイルの一覧
 noremap <C-Z> :Unite file_mru<CR>
 """"""""""""""""""""""""""""""
@@ -52,6 +53,7 @@ noremap <C-Z> :Unite file_mru<CR>
 NeoBundle 'scrooloose/nerdtree'
 
 " NERDTree のショートカット
+" " Ctrl + e でディレクトリ表示
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 " 隠しファイルをデフォルトで表示させる
@@ -68,16 +70,50 @@ NeoBundle 'tpope/vim-fugitive'
 
 " ステータス行に現在のgitブランチを表示する
 set statusline+=%{fugitive#statusline()}
+" git blame のショートカット
+nnoremap <Space>gb :<C-u>Gblame<Enter>
+
+" nnoremap <Space>gd :<C-u>Gdiff<Enter>
+" nnoremap <Space>gs :<C-u>Gstatus<Enter>
+" nnoremap <Space>gl :<C-u>Glog<Enter>
+" nnoremap <Space>ga :<C-u>Gwrite<Enter>
+" nnoremap <Space>gc :<C-u>Gcommit<Enter>
+" nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 """""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""
 " Rails向けのコマンドを提供する
 NeoBundle 'tpope/vim-rails'
+
+nnoremap <buffer><Space>r :R<CR>
+nnoremap <buffer><Space>s :A<CR>
+nnoremap <buffer><Space>m :Rmodel<Space>
+nnoremap <buffer><Space>c :Rcontroller<Space>
+nnoremap <buffer><Space>v :Rview<Space>
+" nnoremap <buffer><Space>p :Rpreview<CR>
+"""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""
+NeoBundle 'https://github.com/basyura/unite-rails'
+nnoremap <buffer><C-H><C-V>  :<C-U>Unite rails/view<CR>
+nnoremap <buffer><C-H><C-M>  :<C-U>Unite rails/model<CR>
+nnoremap <buffer><C-H><C-O>  :<C-U>Unite rails/controller<CR>
+"""""""""""""""""""""""""""""
 
 " Ruby向けにendを自動挿入してくれる
 NeoBundle 'tpope/vim-endwise'
 
-" コメントON/OFFを手軽に実行
-NeoBundle 'tomtom/tcomment_vim'
+"""""""""""""""""""""""""""""
+" コメントアウト用の plugin
+NeoBundle 'scrooloose/nerdcommenter'
+let NERDSpaceDelims = 1
+" cc でコメントアウト
+nmap cc <Plug>NERDCommenterToggle
+vmap cc <Plug>NERDCommenterToggle
+"""""""""""""""""""""""""""""
+
+" 行末の半角スペースを可視化
+NeoBundle 'bronson/vim-trailing-whitespace'
 
 """""""""""""""""""""""""""""
 " 入力補完
@@ -121,6 +157,19 @@ function! s:my_cr_function()
   inoremap <expr><C-e>  neocomplcache#cancel_popup()
 """""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""
+" Memo 用 の plugin
+NeoBundle 'glidenote/memolist.vim'
+
+let g:memolist_path = expand('~/memolist')
+let g:memolist_gfixgrep = 1
+let g:memolist_unite = 1
+let g:memolist_unite_option = "-vertical -start-insert"
+nnoremap mn  :MemoNew<CR>
+nnoremap ml  :MemoList<CR>
+nnoremap mg  :MemoGrep<CR>
+"""""""""""""""""""""""""""""
+
 " colorschme を確認する
 " Usage :Unite -auto-preview colorscheme
 NeoBundle 'unite-colorscheme'
@@ -135,6 +184,8 @@ NeoBundle 'xoria256.vim'
 NeoBundle 'Lucius'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'w0ng/vim-hybrid'
+"""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""
 
 call neobundle#end()
@@ -168,12 +219,59 @@ set tabstop=4
 " jj, jk でモードきりかえ
 inoremap <silent> jj <ESC>
 inoremap <silent> jk <ESC>
+" default な挙動だが、statusline の色を変えるために設定している
+inoremap <silent> <C-c> <ESC>
 
+nnoremap <silent><Space>b :b#<CR>
 " ノーマルモードでは ; を : として扱う
 nnoremap ; :
 
 "status line を常に表示する
 set laststatus=2
+
+" ウインドウのタイトルバーにファイルのパス情報等を表示する
+set title
+" コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
+set wildmenu
+
+" カーソルが何行目の何列目に置かれているかを表示する
+set ruler
+
+""""""""""""""""""""""""""""""
+" https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
+" 挿入モード時、ステータスラインの色を変更
+""""""""""""""""""""""""""""""
+let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
+
+if has('syntax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+  if a:mode == 'Enter'
+    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+    silent exec g:hi_insert
+  else
+    highlight clear StatusLine
+    silent exec s:slhlcmd
+  endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight '.a:hi
+  redir END
+  let hl = substitute(hl, '[\r\n]', '', 'g')
+  let hl = substitute(hl, 'xxx', '', '')
+  return hl
+endfunction
+""""""""""""""""""""""""""""""
+
 "-----------------------------------------------------------------------------
 " FileType ごとの設定
 "-----------------------------------------------------------------------------
