@@ -54,3 +54,4 @@ install gist || true
 install mongodb || true
 
 install peco || true
+install lua || true

@@ -73,7 +73,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats "%b" "%s"
 zstyle ':vcs_info:*' actionformats "%b|%a" "%s"
 # 大文字小文字を区別しない
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 function vcs_info_for_git() {
   VCS_GIT_PROMPT="${vcs_info_msg_0_}"
