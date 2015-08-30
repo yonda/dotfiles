@@ -117,3 +117,5 @@
 [ghq]
 	root = ~/work/op_gees_box/src
 	root = ~/work
+[include]
+	path = ~/.gitconfig.private
