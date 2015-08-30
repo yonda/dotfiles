@@ -20,7 +20,6 @@
 	# checkout
 	co = checkout
 	cb = checkout -b
-	com = checkout master
 
 	# commit
 	ci = commit -v
@@ -31,52 +30,82 @@
 	gl = grep --line-number --show-function --color --heading --break
 
 	# misc
-	st = status
-	ls = ls-files
-	rh = reset head^
-	au = add -u
-	pl = pull
-	pu = push
-	pf = push -f
 	ad = add
+	au = add -u
+	ls = ls-files
+	pl = pull
+	rh = reset head^
+	st = status
+	ref = reflog
+
+	# push
+	pf = push -f
+	pu = push
+	pi = !git rev-parse --abbrev-ref HEAD | xargs git push --set-upstream origin
 
 	# log
 	lo = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 	lp = log -p
 
 	# fetch
-	f = fetch --prune
-	ft = fetch --tags
+	f = fetch -p --tags
 
 	# rebase
 	r = rebase
-	rem = rebase origin/master
 	rec = rebase --continue
 	rea = rebase --abort
 
 	# stash
 	ss = stash save
 	sp = stash pop
+	sl = stash list
+
+	# mergeの際にconflictが起きたファイルを編集
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
 
 	# branch
 	b = branch
 	bd = branch -D
-	dmb = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+	dmb = !git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d
 
 	# hub
-	se = browse # browse github page
+	# browse github page
+	o = browse
+	# wiki ページを開く
+	ow = browse -- wiki
+	# 引数がなければ PR 画面、あれば引数で渡された PR 番号の画面を開く
+	op = "![ $# -eq 0 ] && hub browse -- pulls || hub browse -- pull/$1"
+	# 引数がなければ Issue 画面、あれば引数で渡された Issue 番号の画面を開く
+	oi = "![ $# -eq 0 ] && hub browse -- issues || hub browse -- issue/$1"
+	# 指定した番号の PR に checkout する
+	cop = !"git remote -v | grep origin | grep push | cut -d':' -f2 | cut -d' ' -f1 | xargs -I % hub checkout 'https://github.com/'%'/pull/'$1"
+	# カレントブランチの compare を開く
+	com = !git rev-parse --abbrev-ref HEAD | xargs hub compare
+	pr = pull-request
 
 	# hubflow
 	feature = hf feature
 	hotfix = hf hotfix
 
-	# mergeの際にconflictが起きたファイルを編集
-	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
-
 	cl = clean
+	cn = clean -n
+	cf = clean -f
 
 	# cherry-pick
 	chp = cherry-pick
+
+	# peco
+	# 選択して checkout
+	sco = !git branch | peco | xargs git checkout
+	scr = "!git branch -r | grep -v HEAD | peco | cut -d'/' -f2 |xargs git checkout"
+	# 選択して add
+	sa = "!git status -s | peco | cut -d' ' -f3 | xargs git add"
+	# 選択して branch delete
+	sbd = !git branch | peco | xargs git branch -D
+	# 選択して notification を開く
+	# sn = !ghn list | peco | xargs open
+	# 選択して diff を表示する
+	sd = "!git status -s | grep 'M\\s' | peco | cut -d' ' -f3 | xargs git diff"
 
 [difftool "pretty-diff"]
 	cmd = pretty-diff \"$LOCAL\" \"$REMOTE\"
