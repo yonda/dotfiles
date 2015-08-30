@@ -1,8 +1,10 @@
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=/usr/local:$PATH
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:$PATH"
 export PATH="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/:$PATH"
 export PATH=$PATH:/usr/local/share/python
-eval "$(rbenv init -)"
+eval "$(rbenv init - zsh)"
 
 # oracle
 export DYLD_LIBRARY_PATH=~/opt/oracle/instantclient_11_2
@@ -12,7 +14,6 @@ export ORACLE_SID=BIZCARD
 export NLS_LANG=Japanese_Japan.AL32UTF8
 
 # env
-
 export EDITOR=vim
 
 # aliases
@@ -25,16 +26,24 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias bo='bundle open'
 alias bu='bundle update'
-alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 alias g='git'
-alias gs='git st'
 alias gl='git lo'
 alias gh='git hf'
 
 alias dd='pretty-diff'
-alias show='git se'
+alias sf='swift'
 
 alias va='vagrant'
+
+## incremental
+alias e='ghq list -p | p cd'
+alias hco='git browse'
+alias ho='ghq list -p | p pushd >/dev/null; hub browse; popd >/dev/null'
+
+alias fe='vim `git ls-files | peco`'
+alias no='ghn list | peco | xargs open'
+
+alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
 # HISTFILE
 HISTFILE=~/.zsh_history
@@ -53,16 +62,10 @@ colors
 autoload -Uz add-zsh-hook
 
 # go
-
 export GOPATH=$HOME/.go
 export PATH=$PATH:$HOME/.go/bin
 
 function p() { peco | while read LINE; do $@ $LINE; done }
-
-## alias
-alias e='ghq list -p | p cd'
-alias en='ghq list -p | p cd; show'
-alias c='g br | peco | xargs git checkout'
 
 # for vcs_info
 function _precmd_vcs_info() {
