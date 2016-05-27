@@ -3,6 +3,7 @@
 	email = honda@33i.co.jp
 [core]
 	excludesfile = /Users/yonda/.gitignore
+	pager = less
 [color]
 	ui = auto
 [push]
@@ -11,10 +12,10 @@
 	rebase = true
 [alias]
 	# diff
-	dc = diff --cached
 	d  = diff
+	dc = diff --cached
 	ds = diff --stat
-	dd = diff origin/develop head
+	di = difftool --extcmd icdiff
 	dh = diff head^ head
 
 	# checkout
@@ -23,7 +24,7 @@
 
 	# commit
 	ci = commit -v
-	ca = commit --amend
+	ca = commit --amend -v
 	cm = commit -m
 
 	# grep
@@ -42,6 +43,7 @@
 	pf = push -f
 	pu = push
 	pi = !git rev-parse --abbrev-ref HEAD | xargs git push --set-upstream origin
+	pif = pi -f
 
 	# log
 	lo = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
@@ -81,7 +83,6 @@
 	cop = !"git remote -v | grep origin | grep push | cut -d':' -f2 | cut -d' ' -f1 | xargs -I % hub checkout 'https://github.com/'%'/pull/'$1"
 	# カレントブランチの compare を開く
 	com = !git rev-parse --abbrev-ref HEAD | xargs hub compare
-	pr = pull-request
 
 	# hubflow
 	feature = hf feature
@@ -97,25 +98,31 @@
 	# peco
 	# 選択して checkout
 	sco = !git branch | peco | xargs git checkout
-	scr = "!git branch -r | grep -v HEAD | peco | cut -d'/' -f2 |xargs git checkout"
+	scr = "!git branch -r | grep -v HEAD | peco | cut -d'/' -f2- |xargs git checkout"
+	# 選択して rebase
+	srb = "!git branch | grep -v HEAD | peco | cut -d'/' -f2- |xargs git rebase"
+	# 選択して branch delete
+	sbd = "!git branch | grep -v '*' |peco | xargs git branch -D"
+
 	# 選択して add
 	sa = "!git status -s | peco | cut -d' ' -f3 | xargs git add"
-	# 選択して branch delete
-	sbd = !git branch | peco | xargs git branch -D
-	# 選択して notification を開く
-	# sn = !ghn list | peco | xargs open
 	# 選択して diff を表示する
 	sd = "!git status -s | grep 'M\\s' | peco | cut -d' ' -f3 | xargs git diff"
 
-[difftool "pretty-diff"]
-	cmd = pretty-diff \"$LOCAL\" \"$REMOTE\"
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [ghq]
 	root = ~/work/op_gees_box/src
 	root = ~/work
 [include]
 	path = ~/.gitconfig.private
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[difftool]
+	prompt = false
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[mergetool]
+	prompt = false

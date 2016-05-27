@@ -70,6 +70,15 @@ augroup END
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
+NeoBundle 'soramugi/auto-ctags.vim'
+let g:auto_ctags = 1
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+NeoBundle 'git@github.com:Shougo/vimshell.vim.git'
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
 " syntacs のチェックを行う
 NeoBundle 'scrooloose/syntastic'
 
@@ -86,12 +95,15 @@ NeoBundle 'Shougo/neomru.vim'
 " Unite.vim を利用するときにインサートモードで開始する
 let g:unite_enable_start_insert=1
 
+" 不要ファイルを無視する
+let s:unite_ignore_patterns='\(.\(gif\|jpe\?g\|png\|webp\|xml\)$\|vendor\)'
+
 " バッファ一覧
-noremap <Space>b :Unite buffer<CR>
+noremap <Space>ub :Unite buffer<CR>
 " ファイル一覧
-noremap <Space>f :Unite -buffer-name=file file<CR>
+"noremap <Space>uf :Unite file_rec/git<CR>
 " 最近使ったファイルの一覧
-noremap <Space>z :Unite file_mru<CR>
+noremap <Space>uz :Unite file_mru<CR>
 """"""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
@@ -122,12 +134,25 @@ NeoBundle 'tpope/vim-fugitive'
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 
 nnoremap <Space>gs :<C-u>Gstatus<Enter>
-" nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gd :<C-u>Gdiff<Enter>
 " nnoremap <Space>gl :<C-u>Glog<Enter>
-" nnoremap <Space>ga :<C-u>Gwrite<Enter>
-" nnoremap <Space>gc :<C-u>Gcommit<Enter>
+nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Gcommit -v<Enter>
 " nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 """""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""
+NeoBundle 'git@github.com:gregsexton/gitv.git'
+" gitvでDiffが折りたたまれて表示される問題の対策
+autocmd FileType git :setlocal foldlevel=99
+
+autocmd FileType gitv call s:my_gitv_settings()
+function! s:my_gitv_settings()
+  setlocal iskeyword+=/,-,.
+  nnoremap <silent><buffer> C :<C-u>Git checkout <C-r><C-w><CR>
+endfunction
+"""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""""""
 " Rails向けのコマンドを提供する
@@ -152,6 +177,9 @@ NeoBundle 'https://github.com/basyura/unite-rails'
 nnoremap <Space>v  :<C-U>Unite rails/view<CR>
 nnoremap <Space>m  :<C-U>Unite rails/model<CR>
 nnoremap <Space>c  :<C-U>Unite rails/controller<CR>
+nnoremap <Space>s  :<C-U>Unite rails/spec<CR>
+nnoremap <Space>f  :<C-U>Unite rails/config<CR>
+nnoremap <Space>bi  :<C-U>Unite rails/bundle<CR>
 """""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
@@ -223,6 +251,15 @@ nnoremap mg  :MemoGrep<CR>
 """""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
+NeoBundleLazy 'lambdalisue/unite-grep-vcs', {
+    \ 'autoload': {
+    \    'unite_sources': ['grep/git', 'grep/hg'],
+    \}}
+
+noremap <Space>gl :Unite grep/git:.<CR>
+"""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""
 " colorschme を確認する
 " Usage :Unite -auto-preview colorscheme
 NeoBundle 'unite-colorscheme'
@@ -253,6 +290,11 @@ NeoBundle 'Lokaltog/vim-easymotion'
 " カラー設定変更
 " hi EasyMotionTarget ctermbg=none ctermfg=red
 " hi EasyMotionShade  ctermbg=none ctermfg=blue
+"""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'pangloss/vim-javascript'
 """""""""""""""""""""""""""""
 
 call neobundle#end()
@@ -296,7 +338,7 @@ nnoremap <silent>vs :vs<CR>
 
 nnoremap <silent>vs :vs<CR>
 " ノーマルモードでは ; を : として扱う
-" nnoremap ; :
+nnoremap ; :
 "
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]>
@@ -330,6 +372,20 @@ set ruler
 
 " スプリット時に下にカーソルを移す
 set splitbelow
+" スプリット時に右にカーソルを移す
+set splitright
+
+" 勝手にインデントさせない
+set formatoptions=q
+
+" 大文字小文字は区別しない
+set ignorecase
+
+hi DiffAdd    ctermfg=black ctermbg=2
+hi DiffChange ctermfg=black ctermbg=3
+hi DiffDelete ctermfg=black ctermbg=6
+hi DiffText   ctermfg=black ctermbg=7
+
 """"""""""""""""""""""""""""""
 " https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
 " 挿入モード時、ステータスラインの色を変更
@@ -366,14 +422,21 @@ function! s:GetHighlight(hi)
 endfunction
 """"""""""""""""""""""""""""""
 
+call unite#custom#source('file_rec/async', 'ignore_pattern', s:unite_ignore_patterns)
+call unite#custom#source('file_rec/git', 'ignore_pattern', s:unite_ignore_patterns)
+call unite#custom#source('file_rec', 'ignore_pattern', s:unite_ignore_patterns)
+
 "-----------------------------------------------------------------------------
 " FileType ごとの設定
 "-----------------------------------------------------------------------------
-au FileType ruby     :set nowrap tabstop=2 tw=0 sw=2 expandtab commentstring=#\ %s
-au FileType cucumber :set nowrap tabstop=2 tw=2 sw=2 expandtab
-au FileType haml     :set nowrap tabstop=2 tw=2 sw=2 expandtab
-au FileType sass     :set nowrap tabstop=2 tw=2 sw=2 expandtab
-au FileType coffee   :set nowrap tabstop=2 tw=2 sw=2 expandtab
-au FileType Gemfile  :set nowrap tabstop=2 tw=2 sw=2 expandtab
+au FileType ruby        :set nowrap tabstop=2 tw=0 sw=2 expandtab commentstring=#\ %s
+au FileType cucumber    :set nowrap tabstop=2 tw=2 sw=2 expandtab
+au FileType haml        :set nowrap tabstop=2 tw=2 sw=2 expandtab
+au FileType sass        :set nowrap tabstop=2 tw=2 sw=2 expandtab
+au FileType html        :set nowrap tabstop=2 tw=2 sw=2 expandtab
+" au FileType coffee      :set nowrap tabstop=2 tw=2 sw=2 expandtab
+au FileType Gemfile     :set nowrap tabstop=2 tw=2 sw=2 expandtab
+" au FileType javascript  :set nowrap tabstop=2 tw=2 sw=2 expandtab
+autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
 syntax on

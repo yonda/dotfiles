@@ -4,7 +4,14 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:$PATH"
 export PATH="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/:$PATH"
 export PATH=$PATH:/usr/local/share/python
+export PATH=$PATH:$HOME/work/icdiff/git-icdiff
 eval "$(rbenv init - zsh)"
+
+export NODE_PATH="$HOME/.nvm/versions/node/v0.12.7/lib/node_modules"
+# nvm
+if [[ -s ~/.nvm/nvm.sh ]];
+ then source ~/.nvm/nvm.sh
+fi
 
 # oracle
 export DYLD_LIBRARY_PATH=~/opt/oracle/instantclient_11_2
@@ -12,6 +19,12 @@ export ORACLE_HOME=/Users/yonda/opt/oracle/instantclient_11_2
 export TNS_ADMIN=$ORACLE_HOME/network/admin/tnsnames.ora
 export ORACLE_SID=BIZCARD
 export NLS_LANG=Japanese_Japan.AL32UTF8
+
+# postgresql
+export PGDATA=/usr/local/var/postgres
+
+# heroku
+export PATH="/usr/local/heroku/bin:$PATH"
 
 # env
 export EDITOR=vim
@@ -34,13 +47,15 @@ alias dd='pretty-diff'
 alias sf='swift'
 
 alias va='vagrant'
+alias rs='spring rspec'
 
 ## incremental
 alias e='ghq list -p | p cd'
-alias hco='git browse'
+alias show='git browse'
 alias ho='ghq list -p | p pushd >/dev/null; hub browse; popd >/dev/null'
 
 alias fe='vim `git ls-files | peco`'
+alias srs="git status -s | grep spec | peco | awk 'match(\$0, /spec.*/) { print substr(\$0, RSTART, RLENGTH)}' | xargs bundle exec rspec"
 alias no='ghn list | peco | xargs open'
 
 alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
