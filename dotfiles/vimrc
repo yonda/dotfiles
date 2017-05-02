@@ -107,6 +107,10 @@ noremap <Space>uz :Unite file_mru<CR>
 """"""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
+NeoBundle "ctrlpvim/ctrlp.vim"
+""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""
 " NERDTree
 " ファイルをtree表示してくれる
 NeoBundle 'scrooloose/nerdtree'

@@ -20,7 +20,9 @@
 
 	# checkout
 	co = checkout
+	cod = checkout develop
 	cb = checkout -b
+	cob = checkout -b
 
 	# commit
 	ci = commit -v

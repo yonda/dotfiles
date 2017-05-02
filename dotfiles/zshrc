@@ -7,7 +7,7 @@ export PATH=$PATH:/usr/local/share/python
 export PATH=$PATH:$HOME/work/icdiff/git-icdiff
 eval "$(rbenv init - zsh)"
 
-export NODE_PATH="$HOME/.nvm/versions/node/v0.12.7/lib/node_modules"
+export NODE_PATH="$HOME/.nvm/versions/node/v6.7.0/lib/node_modules"
 # nvm
 if [[ -s ~/.nvm/nvm.sh ]];
  then source ~/.nvm/nvm.sh
@@ -48,6 +48,13 @@ alias sf='swift'
 
 alias va='vagrant'
 alias rs='spring rspec'
+alias rs='rails c'
+
+alias t='todoist'
+alias tl='todoist l'
+alias ta='todoist a'
+alias ta='todoist s'
+alias tc='peco-todoist-close'
 
 ## incremental
 alias e='ghq list -p | p cd'
@@ -81,6 +88,22 @@ export GOPATH=$HOME/.go
 export PATH=$PATH:$HOME/.go/bin
 
 function p() { peco | while read LINE; do $@ $LINE; done }
+function peco-history-selection() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
 # for vcs_info
 function _precmd_vcs_info() {
@@ -160,4 +183,52 @@ fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 autoload -U compinit
 compinit -u
 
+# todoist find project
+function peco-todoist-project () {
+    local SELECTED_PROJECT="$(todoist projects | peco | head -n1 | cut -d ' ' -f 1)"
+    if [ -n "$SELECTED_PROJECT" ]; then
+        if [ -n "$LBUFFER" ]; then
+            local new_left="${LBUFFER%\ } $SELECTED_PROJECT"
+        else
+            local new_left="$SELECTED_PROJECT"
+        fi
+        BUFFER=${new_left}${RBUFFER}
+        CURSOR=${#new_left}
+    fi
+}
+zle -N peco-todoist-project
+bindkey '^ep' peco-todoist-project
+
+# todoist close
+function peco-todoist-close() {
+    local SELECTED_ITEMS="$(todoist list | peco | cut -d ' ' -f 1 | tr '\n' ' ')"
+    if [ -n "$SELECTED_ITEMS" ]; then
+        BUFFER="todoist close $(echo "$SELECTED_ITEMS" | tr '\n' ' ')"
+        CURSOR=$#BUFFER
+    fi
+    zle accept-line
+}
+zle -N peco-todoist-close
+bindkey '^ec' peco-todoist-close
+
+# todoist delete
+function peco-todoist-delete() {
+    local SELECTED_ITEMS="$(todoist list | peco | cut -d ' ' -f 1 | tr '\n' ' ')"
+    if [ -n "$SELECTED_ITEMS" ]; then
+        BUFFER="todoist delete $(echo "$SELECTED_ITEMS" | tr '\n' ' ')"
+        CURSOR=$#BUFFER
+    fi
+    zle accept-line
+}
+zle -N peco-todoist-delete
+bindkey '^ed' peco-todoist-delete
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+zshaddhistory() {
+    local line=${1%%$'\n'}
+    local cmd=${line%% *}
+
+    # 以下の条件をすべて満たすものだけをヒストリに追加する
+    [[ ${#line} -ge 2 ]]
+}
