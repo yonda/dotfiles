@@ -443,4 +443,8 @@ au FileType Gemfile     :set nowrap tabstop=2 tw=2 sw=2 expandtab
 " au FileType javascript  :set nowrap tabstop=2 tw=2 sw=2 expandtab
 autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
+let g:molokai_original = 1
+let g:rehash256 = 1
+
 syntax on
+

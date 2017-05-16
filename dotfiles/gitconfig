@@ -2,7 +2,7 @@
 	name = yonda
 	email = honda@33i.co.jp
 [core]
-	excludesfile = /Users/yonda/.gitignore
+	excludesfile = ~/.gitignore
 	pager = less
 [color]
 	ui = auto
@@ -112,8 +112,7 @@
 	sd = "!git status -s | grep 'M\\s' | peco | cut -d' ' -f3 | xargs git diff"
 
 [ghq]
-	root = ~/work/op_gees_box/src
-	root = ~/work
+	root = ~/src
 [include]
 	path = ~/.gitconfig.private
 [filter "lfs"]
