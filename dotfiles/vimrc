@@ -279,6 +279,8 @@ NeoBundle 'xoria256.vim'
 NeoBundle 'Lucius'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'forsigner/one-dark.vim'
 """""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
@@ -445,6 +447,4 @@ autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
 
 syntax on
 
-set background=dark
-colorscheme solarized
-
+colorscheme onedark
