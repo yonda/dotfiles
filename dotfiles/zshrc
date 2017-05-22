@@ -1,30 +1,18 @@
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH=/usr/local:$PATH
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-export PATH="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:$PATH"
-export PATH="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/:$PATH"
-export PATH=$PATH:/usr/local/share/python
-export PATH=$PATH:$HOME/work/icdiff/git-icdiff
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+if [ -z $TMUX ]; then
+  export PATH=/usr/local:$PATH
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+  export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+  export PATH="/usr/local/var/rbenv:$PATH"
+  export NODE_PATH="$HOME/.nvm/versions/node/v6.7.0/lib/node_modules"
+  eval "$(rbenv init - --no-rehash)"
+  # postgresql
+  export PGDATA=/usr/local/var/postgres
+fi
 
-export NODE_PATH="$HOME/.nvm/versions/node/v6.7.0/lib/node_modules"
 # nvm
 if [[ -s ~/.nvm/nvm.sh ]];
  then source ~/.nvm/nvm.sh
 fi
-
-# oracle
-export DYLD_LIBRARY_PATH=~/opt/oracle/instantclient_11_2
-export ORACLE_HOME=/Users/yonda/opt/oracle/instantclient_11_2
-export TNS_ADMIN=$ORACLE_HOME/network/admin/tnsnames.ora
-export ORACLE_SID=BIZCARD
-export NLS_LANG=Japanese_Japan.AL32UTF8
-
-# postgresql
-export PGDATA=/usr/local/var/postgres
-
-# heroku
-export PATH="/usr/local/heroku/bin:$PATH"
 
 # env
 export EDITOR=vim
