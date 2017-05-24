@@ -70,6 +70,7 @@
 	# branch
 	b = branch
 	bd = branch -D
+	rbd = push --delete origin
 	dmb = !git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d
 
 	# hub
