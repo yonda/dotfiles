@@ -17,6 +17,7 @@
 	ds = diff --stat
 	di = difftool --extcmd icdiff
 	dh = diff head^ head
+	dd = diff develop head^
 
 	# checkout
 	co = checkout
@@ -53,6 +54,9 @@
 
 	# fetch
 	f = fetch -p --tags
+
+	# revert
+	rem = revert -m 1
 
 	# rebase
 	r = rebase
