@@ -49,27 +49,6 @@ set tags+=.Gemfile.lock.tags
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
-NeoBundle 'thinca/vim-quickrun'
-
-let g:quickrun_config = {}
-let g:quickrun_config._ = { 'runner' : 'vimproc' }
-let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec','cmdopt': 'bundle exec', 'exec': '%o %c %s'}
-augroup RSpec
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-" vim-quickrun で実行する rspec を色付きにする
-NeoBundle 'vim-scripts/AnsiEsc.vim'
-augroup quickrun
-  autocmd!
-  autocmd FileType quickrun AnsiEsc
-augroup END
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
 NeoBundle 'soramugi/auto-ctags.vim'
 let g:auto_ctags = 1
 """"""""""""""""""""""""""""""
@@ -271,16 +250,16 @@ NeoBundle 'unite-colorscheme'
 
 """""""""""""""""""""""""""""
 " color
-NeoBundle 'mrkn/mrkn256.vim'
-NeoBundle 'guicolorscheme.vim'
-NeoBundle 'wombat256.vim'
-NeoBundle 'vividchalk.vim'
-NeoBundle 'xoria256.vim'
-NeoBundle 'Lucius'
-NeoBundle 'chriskempson/vim-tomorrow-theme'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'forsigner/one-dark.vim'
+" NeoBundle 'mrkn/mrkn256.vim'
+" NeoBundle 'guicolorscheme.vim'
+" NeoBundle 'wombat256.vim'
+" NeoBundle 'vividchalk.vim'
+" NeoBundle 'xoria256.vim'
+" NeoBundle 'Lucius'
+" NeoBundle 'chriskempson/vim-tomorrow-theme'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'forsigner/one-dark.vim'
 """""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
@@ -447,4 +426,4 @@ autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
 
 syntax on
 
-colorscheme onedark
+colorscheme peachpuff
