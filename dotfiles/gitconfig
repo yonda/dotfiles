@@ -80,7 +80,7 @@
 
 	# hub
 	# browse github page
-	o = browse
+	o = !hub browse
 	# wiki ページを開く
 	ow = browse -- wiki
 	# 引数がなければ PR 画面、あれば引数で渡された PR 番号の画面を開く
