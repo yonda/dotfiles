@@ -32,7 +32,7 @@
 	cm = commit -m
 
 	# grep
-	gl = grep --line-number --show-function --color --heading --break
+	gl = grep --line-number --color
 
 	# misc
 	ad = add
@@ -47,10 +47,10 @@
 	pf = push -f
 	pu = push
 	pi = !git rev-parse --abbrev-ref HEAD | xargs git push --set-upstream origin
-	pif = pi -f
+	pif = !git rev-parse --abbrev-ref HEAD | xargs git push -f --set-upstream origin
 
 	# log
-	lo = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+	lo = log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 	lp = log -p -S
 
 	# fetch
@@ -61,8 +61,9 @@
 
 	# rebase
 	r = rebase
-	rec = rebase --continue
-	rea = rebase --abort
+	rd= rebase develop
+	rc = rebase --continue
+	ra = rebase --abort
 
 	# stash
 	ss = stash save
@@ -81,6 +82,8 @@
 	# hub
 	# browse github page
 	o = !hub browse
+	# ファイルを指定して開く
+	of = !hub browse -- tree/develop/$1
 	# wiki ページを開く
 	ow = browse -- wiki
 	# 引数がなければ PR 画面、あれば引数で渡された PR 番号の画面を開く
@@ -91,6 +94,16 @@
 	cop = !"git remote -v | grep origin | grep push | cut -d':' -f2 | cut -d' ' -f1 | xargs -I % hub checkout 'https://github.com/'%'/pull/'$1"
 	# カレントブランチの compare を開く
 	com = !git rev-parse --abbrev-ref HEAD | xargs hub compare
+
+	# PR を revert する
+    prr = "!f () {\
+		pr_num=${1};\
+		commit= git log --pretty=format:'%h %s' | grep Merge | grep '#'${pr_num} | cut -d' ' -f1 | xargs git revert -m 1; \
+		};f"
+    prrc = "!f () {\
+		pr_num=${1};\
+		commit= git log --pretty=format:'%h %s' | grep Merge | grep '#'${pr_num}; \
+		};f"
 
 	# hubflow
 	feature = hf feature

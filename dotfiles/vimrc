@@ -41,16 +41,11 @@ NeoBundle 'Shougo/vimproc.vim', {
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
-NeoBundle 'szw/vim-tags'
-let g:vim_tags_project_tags_command = "/usr/local/Cellar/ctags/5.8/bin/ctags -f .tags -R . 2>/dev/null"
-let g:vim_tags_gems_tags_command = "/usr/local/Cellar/ctags/5.8/bin/ctags -R -f .Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
-set tags+=.tags
-set tags+=.Gemfile.lock.tags
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-NeoBundle 'soramugi/auto-ctags.vim'
-let g:auto_ctags = 1
+" NeoBundle 'szw/vim-tags'
+" let g:vim_tags_project_tags_command = "/usr/local/Cellar/ctags/5.8/bin/ctags -f .tags -R . 2>/dev/null"
+" let g:vim_tags_gems_tags_command = "/usr/local/Cellar/ctags/5.8/bin/ctags -R -f .Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+" set tags+=.tags
+" set tags+=.Gemfile.lock.tags
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
@@ -69,7 +64,7 @@ nnoremap <Space>sc :SyntasticCheck<Enter>
 """"""""""""""""""""""""""""""
 " Unit.vim の設定
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
+" NeoBundle 'Shougo/neomru.vim'
 
 " Unite.vim を利用するときにインサートモードで開始する
 let g:unite_enable_start_insert=1
@@ -79,15 +74,7 @@ let s:unite_ignore_patterns='\(.\(gif\|jpe\?g\|png\|webp\|xml\)$\|vendor\)'
 
 " バッファ一覧
 noremap <Space>ub :Unite buffer<CR>
-" ファイル一覧
-"noremap <Space>uf :Unite file_rec/git<CR>
-" 最近使ったファイルの一覧
-noremap <Space>uz :Unite file_mru<CR>
 """"""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""
-NeoBundle "ctrlpvim/ctrlp.vim"
-""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""
 " NERDTree
@@ -136,7 +123,6 @@ function! s:my_gitv_settings()
 endfunction
 """""""""""""""""""""""""""""
 
-
 """""""""""""""""""""""""""""
 " Rails向けのコマンドを提供する
 NeoBundle 'tpope/vim-rails'
@@ -145,7 +131,7 @@ NeoBundle 'tpope/vim-rails'
 nnoremap <Space>rr :R<CR>
 nnoremap <Space>rs :RS<CR>
 nnoremap <Space>rv :RV<CR>
-" テストとプロダクトを切り替える
+" spec と application を切り替える
 nnoremap <Space>aa :A<CR>
 nnoremap <Space>as :AS<CR>
 nnoremap <Space>av :AV<CR>
@@ -158,8 +144,10 @@ nnoremap <Space>av :AV<CR>
 """""""""""""""""""""""""""""
 NeoBundle 'https://github.com/basyura/unite-rails'
 nnoremap <Space>v  :<C-U>Unite rails/view<CR>
+nnoremap <Space>j  :<C-U>Unite rails/job<CR>
 nnoremap <Space>m  :<C-U>Unite rails/model<CR>
 nnoremap <Space>c  :<C-U>Unite rails/controller<CR>
+nnoremap <Space>d  :<C-U>Unite rails/db<CR>
 nnoremap <Space>s  :<C-U>Unite rails/spec<CR>
 nnoremap <Space>f  :<C-U>Unite rails/config<CR>
 nnoremap <Space>bi  :<C-U>Unite rails/bundle<CR>
@@ -282,6 +270,11 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascr
 NeoBundle 'pangloss/vim-javascript'
 """""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""
+NeoBundle 'simeji/winresizer'
+"""""""""""""""""""""""""""""
+
+
 call neobundle#end()
 
 " Required:
@@ -321,7 +314,10 @@ nnoremap <silent><Space>b :b#<CR>
 nnoremap <silent>ss :sp<CR>
 nnoremap <silent>vs :vs<CR>
 
-nnoremap <silent>vs :vs<CR>
+nnoremap <silent>tt :tabnew<CR>
+nnoremap <silent>tn gt<CR>
+nnoremap <silent>tp gT<CR>
+
 " ノーマルモードでは ; を : として扱う
 nnoremap ; :
 "
@@ -339,6 +335,10 @@ inoremap <C-l> <Right>
 " inoremap <C-p> <Up>
 " inoremap <C-b> <Left>
 " inoremap <C-f> <Right>
+
+nnoremap sh :belowright :terminal<CR>
+tnoremap <C-q> <C-W>N
+tnoremap <C-T> <C-W>""
 
 "status line を常に表示する
 set laststatus=2
@@ -427,3 +427,6 @@ autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2
 syntax on
 
 colorscheme peachpuff
+
+" tnoremap <C-i> <C-W>N
+tnoremap <C-[> <C-W>""

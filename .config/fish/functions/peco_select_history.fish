@@ -8,8 +8,7 @@ function peco_select_history
   history|peco|read foo
 
   if [ $foo ]
-    eval $foo
-    commandline -f repaint
+    commandline $foo
   else
     commandline ''
   end
