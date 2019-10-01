@@ -61,6 +61,9 @@ alias no='ghn list | peco | xargs open'
 
 alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
+# kill kav
+alias korosu='ps -ef | pgrep kav | sudo xargs kill -9'
+
 # HISTFILE
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
