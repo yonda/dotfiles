@@ -4,6 +4,7 @@ ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/tmux.conf ~/.tmux.con
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/vimrc ~/.vimrc
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/zshrc ~/.zshrc
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/Brewfile ~/Brewfile
+ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/gitignore ~/.gitignore
 
 # NOTE まだ作ってない時だけ
 # touch ~/.gitconfig.private
