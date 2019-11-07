@@ -154,3 +154,8 @@ let g:ale_fixers = {
 [[plugins]]
 repo = 'simeji/winresizer'
 
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'wakatime/vim-wakatime'

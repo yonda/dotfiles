@@ -22,7 +22,6 @@ noremap <silent> vs :vs<CR>
 inoremap <silent> jj <ESC>
 inoremap <silent> jk <ESC>
 
-noremap <silent> <C-[> g<C-]>
 noremap <silent> <Space>p :pop<CR>
 
 " 挿入モードでのカーソル移動(vim like)
@@ -96,3 +95,5 @@ syntax enable
 if dein#check_install()
   call dein#install()
 end
+
+call map(dein#check_clean(), "delete(v:val, 'rf')")
