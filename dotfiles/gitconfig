@@ -1,6 +1,6 @@
 [user]
 	name = yonda
-	email = honda@33i.co.jp
+	email = honda@sansan.com
 [core]
 	excludesfile = ~/.gitignore
 	pager = less
@@ -78,22 +78,39 @@
 	bd = branch -D
 	rbd = push --delete origin
 	dmb = !git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d
+	md = merge develop
 
 	# hub
 	# browse github page
 	o = !hub browse
 	# ファイルを指定して開く
-	of = !hub browse -- tree/develop/$1
+        of = "!git rev-parse --abbrev-ref HEAD | xargs -I {} hub browse -- tree/{}/$1"
 	# wiki ページを開く
 	ow = browse -- wiki
 	# 引数がなければ PR 画面、あれば引数で渡された PR 番号の画面を開く
 	op = "![ $# -eq 0 ] && hub browse -- pulls || hub browse -- pull/$1"
 	# 引数がなければ Issue 画面、あれば引数で渡された Issue 番号の画面を開く
 	oi = "![ $# -eq 0 ] && hub browse -- issues || hub browse -- issue/$1"
-	# 指定した番号の PR に checkout する
-	cop = !"git remote -v | grep origin | grep push | cut -d':' -f2 | cut -d' ' -f1 | xargs -I % hub checkout 'https://github.com/'%'/pull/'$1"
+	# PR を選んで checkout する
+  cop = "!hub pr list -f '%pC%>(8)%i%Creset %t %au % l%n' | peco | cut -d ' ' -f3 | cut -b 2- | xargs hub pr checkout"
 	# カレントブランチの compare を開く
 	com = !git rev-parse --abbrev-ref HEAD | xargs hub compare
+
+	# peco
+	# 選択して checkout
+	sco = !git branch | peco | xargs git checkout
+  scr = "!hub pr list -f '%pC%>(8)%i%Creset %t %au % l%n' | peco | cut -d ' ' -f3 | cut -b 2- | xargs hub pr checkout"
+  so = "!hub pr list -f '%pC%>(8)%i%Creset %t %au % l%n' | peco | cut -d ' ' -f3 | cut -b 2- | xargs hub pr show"
+
+	# 選択して rebase
+	srb = "!git branch | grep -v HEAD | peco | cut -d'/' -f2- |xargs git rebase"
+	# 選択して branch delete
+	sbd = "!git branch | grep -v '*' |peco | xargs git branch -D"
+
+	# 選択して add
+	sa = "!git status -s | peco | cut -d' ' -f3 | xargs git add"
+	# 選択して diff を表示する
+	sd = "!git status -s | grep 'M\\s' | peco | cut -d' ' -f3 | xargs git diff"
 
 	# PR を revert する
     prr = "!f () {\
@@ -116,19 +133,6 @@
 	# cherry-pick
 	chp = cherry-pick
 
-	# peco
-	# 選択して checkout
-	sco = !git branch | peco | xargs git checkout
-	scr = "!git branch -r | grep -v HEAD | peco | cut -d'/' -f2- |xargs git checkout"
-	# 選択して rebase
-	srb = "!git branch | grep -v HEAD | peco | cut -d'/' -f2- |xargs git rebase"
-	# 選択して branch delete
-	sbd = "!git branch | grep -v '*' |peco | xargs git branch -D"
-
-	# 選択して add
-	sa = "!git status -s | peco | cut -d' ' -f3 | xargs git add"
-	# 選択して diff を表示する
-	sd = "!git status -s | grep 'M\\s' | peco | cut -d' ' -f3 | xargs git diff"
 
 [ghq]
 	root = ~/src
