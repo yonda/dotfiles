@@ -30,6 +30,7 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " sh でターミナル開く
 nnoremap sh :belowright :terminal<CR>
@@ -95,5 +96,6 @@ syntax enable
 if dein#check_install()
   call dein#install()
 end
+
 
 call map(dein#check_clean(), "delete(v:val, 'rf')")
