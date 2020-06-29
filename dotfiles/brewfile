@@ -10,6 +10,8 @@ brew carthage
 brew cloc
 brew ctags
 brew direnv
+brew docbook
+brew docbook-xsl
 brew docker-machine
 brew exa
 brew fontconfig
@@ -28,6 +30,7 @@ brew git-flow
 brew git-lfs
 brew glib
 brew gmp
+brew gnu-getopt
 brew gnutls
 brew graphite2
 brew graphviz
@@ -41,6 +44,7 @@ brew imagemagick@6
 brew jasper
 brew jpeg
 brew jq
+brew krb5
 brew libde265
 brew libevent
 brew libffi
@@ -48,6 +52,7 @@ brew libgcrypt
 brew libgpg-error
 brew libheif
 brew libidn2
+brew liblqr
 brew libomp
 brew libpng
 brew libspiro
@@ -77,6 +82,7 @@ brew node
 brew oath-toolkit
 brew oniguruma
 brew openexr
+brew openjdk
 brew openjpeg
 brew openssl@1.1
 brew p11-kit
@@ -88,6 +94,7 @@ brew pixman
 brew pkg-config
 brew plantuml
 brew postgresql
+brew protobuf
 brew python
 brew python@3.8
 brew rbenv
@@ -103,9 +110,11 @@ brew tmux
 brew translate-shell
 brew unbound
 brew unibilium
+brew utf8proc
 brew watch
 brew webp
 brew x265
+brew xmlto
 brew xz
 brew yarn
 
@@ -133,15 +142,16 @@ tap versent/taps
 brew saml2aws
 
 # App Store applications
-appstore 1333542190 1Password 7 (7.4.4)
+appstore 1333542190 1Password 7 (7.5)
 appstore 549083868 Display Menu (2.2.3)
 appstore 777233759 Focus (6.2.3)
 appstore 409183694 Keynote (10.0)
-appstore 539883307 LINE (5.23.0)
+appstore 539883307 LINE (6.0.3)
 appstore 441258766 Magnet (2.4.5)
 appstore 409203825 Numbers (10.0)
-appstore 1429033973 RunCat (7.3)
+appstore 1429033973 RunCat (7.9)
+appstore 425955336 Skitch (2.8.4)
 appstore 907364780 Tomato One (1.0.6)
 appstore 914450696 Traffic (1.22)
 appstore 485812721 TweetDeck (3.16.1)
-appstore 497799835 Xcode (11.0)
+appstore 497799835 Xcode (11.5)
