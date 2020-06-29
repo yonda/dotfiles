@@ -3,7 +3,7 @@ ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/gitconfig ~/.gitconfi
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/tmux.conf ~/.tmux.conf
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/vimrc ~/.vimrc
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/zshrc ~/.zshrc
-ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/Brewfile ~/Brewfile
+ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/Brewfile ~/.brewfile/Brewfile
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/gitignore ~/.gitignore
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf /Users/honda/src/github.com/yonda/dotfiles/dotfiles/config/nvim/dein.toml ~/.config/nvim/dein.toml
