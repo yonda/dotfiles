@@ -1,57 +1,147 @@
-tap homebrew/versions|| true
 
-# development
+# tap repositories and their packages
 
-## brew-cask
-tap phinze/homebrew-cask || true
-install brew-cask || true
-install openssl || true
-install readline || true
-install libyaml || true
-install autoconf || true
-install ack || true
+tap homebrew/core
+brew ack
+brew autoconf
+brew bluetoothconnector
+brew cairo
+brew carthage
+brew cloc
+brew ctags
+brew direnv
+brew docker-machine
+brew exa
+brew fontconfig
+brew fontforge
+brew freetype
+brew fribidi
+brew gawk
+brew gd
+brew gdbm
+brew gettext
+brew ghostscript
+brew ghq
+brew giflib
+brew git
+brew git-flow
+brew git-lfs
+brew glib
+brew gmp
+brew gnutls
+brew graphite2
+brew graphviz
+brew gts
+brew harfbuzz
+brew hub
+brew icu4c
+brew ilmbase
+brew imagemagick
+brew imagemagick@6
+brew jasper
+brew jpeg
+brew jq
+brew libde265
+brew libevent
+brew libffi
+brew libgcrypt
+brew libgpg-error
+brew libheif
+brew libidn2
+brew libomp
+brew libpng
+brew libspiro
+brew libtasn1
+brew libtermkey
+brew libtiff
+brew libtool
+brew libuninameslist
+brew libunistring
+brew libuv
+brew libvterm
+brew libxml2
+brew libxmlsec1
+brew little-cms2
+brew luajit
+brew lzo
+brew mas
+brew mpfr
+brew msgpack
+brew mysql
+brew mysql@5.7
+brew ncurses
+brew neovim
+brew netpbm
+brew nettle
+brew node
+brew oath-toolkit
+brew oniguruma
+brew openexr
+brew openjpeg
+brew openssl@1.1
+brew p11-kit
+brew pango
+brew pcre
+brew pcre2
+brew peco
+brew pixman
+brew pkg-config
+brew plantuml
+brew postgresql
+brew python
+brew python@3.8
+brew rbenv
+brew readline
+brew reattach-to-user-namespace
+brew rlwrap
+brew ruby-build
+brew shared-mime-info
+brew sqlite
+brew the_platinum_searcher
+brew the_silver_searcher
+brew tmux
+brew translate-shell
+brew unbound
+brew unibilium
+brew watch
+brew webp
+brew x265
+brew xz
+brew yarn
 
-## ruby
-install rbenv || true
-install ruby-build || true
+tap homebrew/services
 
-## mysql
-install mysql55 || true
+tap homebrew/cask
+cask adoptopenjdk
+cask android-platform-tools
+cask android-sdk
+cask bitbar
+cask chromedriver
+cask java
 
-## redis
-install redis || true
-install phantomjs || true
-install imagemagick || true
+tap argon/mas
 
-## virtual
-cask install virtualbox || true
-cask install vagrant || true
-install docker || true
-cask boot2docker || true
+tap neovim/neovim
 
-# other
-install npm || true
-install ansible || true
+tap rcmdnk/file
+brew brew-file
 
-## security
-cask install clamxav
+tap sanemat/font
+brew ricty
 
-# personal
+tap versent/taps
+brew saml2aws
 
-## general
-cask install google-chrome || true
-cask install firefox || true
-cask install kobito || true
-cask install skype || true
-cask install dropbox || true
-cask install skitch || true
-cask install macvim || true
-
-## dev
-cask install iterm2 || true
-install tmux || true
-install gist || true
-install mongodb || true
-
-install peco || true
-install lua || true
+# App Store applications
+appstore 1333542190 1Password 7 (7.4.4)
+appstore 549083868 Display Menu (2.2.3)
+appstore 777233759 Focus (6.2.3)
+appstore 409183694 Keynote (10.0)
+appstore 539883307 LINE (5.23.0)
+appstore 441258766 Magnet (2.4.5)
+appstore 409203825 Numbers (10.0)
+appstore 1429033973 RunCat (7.3)
+appstore 907364780 Tomato One (1.0.6)
+appstore 914450696 Traffic (1.22)
+appstore 485812721 TweetDeck (3.16.1)
+appstore 497799835 Xcode (11.0)
