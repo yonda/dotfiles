@@ -38,13 +38,12 @@ alias bo='bundle open'
 alias bu='bundle update'
 alias g='git'
 alias gl='git lo'
-alias gh='git hf'
+alias c='code'
 
 alias ls='exa'
 
 alias vim=nvim
 
-alias dd='pretty-diff'
 alias sf='swift'
 
 alias va='vagrant'
@@ -194,9 +193,7 @@ typeset -U path PATH
   # zprof
 # fi
 
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.100:2376"
-export DOCKER_CERT_PATH="/Users/honda/.docker/machine/machines/eightdev"
-export DOCKER_MACHINE_NAME="eightdev"
-# Run this command to configure your shell: 
+# Run this command to configure your shell:
 # eval $(docker-machine env dev)
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

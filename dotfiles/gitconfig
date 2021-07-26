@@ -26,6 +26,9 @@
 	cb = checkout -b
 	cob = checkout -b
 
+	coo = checkout --ours
+	cot = checkout --theirs
+
 	# commit
 	ci = commit -v
 	ca = commit --amend -v
@@ -80,9 +83,10 @@
 	dmb = !git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d
 	md = merge develop
 
+
 	# hub
 	# browse github page
-	o = !hub browse
+        o = !gh repo view --web
 	# ファイルを指定して開く
         of = "!git rev-parse --abbrev-ref HEAD | xargs -I {} hub browse -- tree/{}/$1"
 	# wiki ページを開く
@@ -94,7 +98,7 @@
 	# PR を選んで checkout する
   cop = "!hub pr list -f '%pC%>(8)%i%Creset %t %au % l%n' | peco | cut -d ' ' -f3 | cut -b 2- | xargs hub pr checkout"
 	# カレントブランチの compare を開く
-	com = !git rev-parse --abbrev-ref HEAD | xargs hub compare
+	com = !gh pr create -w
 
 	# peco
 	# 選択して checkout

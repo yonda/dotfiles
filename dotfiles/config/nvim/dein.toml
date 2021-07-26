@@ -176,7 +176,9 @@ repo = 'tpope/vim-bundler'
 repo = 'w0rp/ale'
 hook_add = '''
 let g:ale_fixers = {
-  \   'ruby': ['rubocop'],
+  \ 'ruby': ['rubocop'],
+  \ 'css': ['stylelint'],
+  \ 'javascript': ['eslint'],
   \}
   nnoremap <Space>af :ALEFix<CR>
 '''
@@ -198,3 +200,19 @@ repo = 'udalov/kotlin-vim'
 
 [[plugins]]
 repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'alampros/vim-styled-jsx'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'moll/vim-node'
+on_ft = ['javascript']
