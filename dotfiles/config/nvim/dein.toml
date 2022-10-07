@@ -103,13 +103,6 @@ hook_add = '''
   noremap <Space>uz :Denite file_mru<CR>
 '''
 
-# yank 履歴
-[[plugins]]
-repo = 'Shougo/neoyank.vim'
-hook_add = '''
-  noremap <Space>y :Denite neoyank<CR>
-'''
-
 [[plugins]]
 repo = '5t111111/denite-rails'
 hook_add = '''
@@ -130,9 +123,9 @@ build = 'make'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
-  nnoremap <Space>gb :<C-u>Gblame<Enter>
-  nnoremap <Space>gs :<C-u>Gstatus<Enter>
-  nnoremap <Space>gd :<C-u>Gdiff<Enter>
+  nnoremap <Space>gb :<C-u>Git blame<Enter>
+  nnoremap <Space>gs :<C-u>Git<Enter>
+  nnoremap <Space>gd :<C-u>Git diff<Enter>
 '''
 
 # vim-rails
@@ -172,15 +165,24 @@ repo = 'tpope/vim-rbenv'
 [[plugins]]
 repo = 'tpope/vim-bundler'
 
+
+# yank 履歴
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+hook_add = '''
+  noremap <Space>y :Denite neoyank<CR>
+'''
+
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = '''
-let g:ale_fixers = {
+let g:ale_linters = {
   \ 'ruby': ['rubocop'],
   \ 'css': ['stylelint'],
   \ 'javascript': ['eslint'],
   \}
-  nnoremap <Space>af :ALEFix<CR>
+let g:ale_linters_explicit = 1
+nnoremap <Space>af :ALEFix<CR>
 '''
 
 [[plugins]]
@@ -188,9 +190,6 @@ repo = 'simeji/winresizer'
 
 [[plugins]]
 repo = 'tpope/vim-endwise'
-
-[[plugins]]
-repo = 'wakatime/vim-wakatime'
 
 [[plugins]]
 repo = 'slim-template/vim-slim'

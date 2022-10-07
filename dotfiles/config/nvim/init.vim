@@ -30,11 +30,7 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-let g:python3_host_prog = '/usr/local/bin/python3'
-
-" sh でターミナル開く
-nnoremap sh :belowright :terminal<CR>
-autocmd TermOpen * setlocal nonumber
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 "x キー削除でデフォルトレジスタに入れない
 nnoremap x "_x
@@ -51,35 +47,25 @@ set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let g:rc_dir = expand('~/.config/nvim')
 
 " dein.vim がなければ github から落としてくる
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+if !isdirectory(s:dein_repo_dir)
+  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
 endif
+execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイルを用意しておく
-  let g:rc_dir    = expand("~/.config/nvim/")
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
   " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
 
   call dein#end()
   call dein#save_state()

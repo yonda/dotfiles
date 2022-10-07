@@ -3,18 +3,26 @@ if [ -z $TMUX ]; then
   export PATH=/usr/local:$PATH
   export PATH=$HOME/.nodebrew/current/bin:$PATH
   export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-  export PATH="/usr/local/var/rbenv:$PATH"
   # export NODE_PATH="$HOME/.nvm/versions/node/v6.7.0/lib/node_modules"
   # postgresql
   export PGDATA=/usr/local/var/postgres
   # go
   export GOPATH=$HOME/.go
   export PATH=$PATH:$HOME/.go/bin
-  export ANDROID_HOME=“/usr/local/share/android-sdk”
-  export PATH=“${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools”
 fi
 
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="/opt/homebrew/opt/imagemagick@6/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin(N-/)
+  /opt/homebrew/sbin(N-/)
+  /usr/bin /usr/sbin /bin /sbin /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
+  /Library/Apple/usr/bin
+)
+
 eval "$(rbenv init - --no-rehash)"
 
 # nvm
@@ -195,5 +203,6 @@ typeset -U path PATH
 
 # Run this command to configure your shell:
 # eval $(docker-machine env dev)
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
