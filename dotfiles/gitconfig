@@ -88,7 +88,7 @@
 	# browse github page
         o = !gh repo view --web
 	# ファイルを指定して開く
-        of = "!git rev-parse --abbrev-ref HEAD | xargs -I {} hub browse -- tree/{}/$1"
+	of = "!git rev-parse --abbrev-ref HEAD master develop| peco | xargs git rev-parse | xargs -I {} hub browse -- tree/{}/$1"
 	# wiki ページを開く
 	ow = browse -- wiki
 	# 引数がなければ PR 画面、あれば引数で渡された PR 番号の画面を開く
