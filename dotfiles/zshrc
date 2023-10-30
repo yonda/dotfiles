@@ -32,10 +32,9 @@ fi
 
 # env
 export EDITOR=nvim
-eval "$(direnv hook zsh)"
 
 # aliases
-alias ls="ls -FG"
+# alias ls="ls -FG"
 alias la='ls -al'
 alias b='bundle'
 alias bo='bundle open'
@@ -46,35 +45,17 @@ alias bo='bundle open'
 alias bu='bundle update'
 alias g='git'
 alias gl='git lo'
-alias c='code'
 
-alias ls='exa'
+# alias ls='exa'
 
 alias vim=nvim
 
-alias sf='swift'
-
-alias va='vagrant'
-alias rs='spring rspec'
 alias rs='rails c'
-
-alias t='todoist'
-alias tl='todoist l'
-alias ta='todoist a'
-alias ta='todoist s'
-alias tc='peco-todoist-close'
 
 # ## incremental
 alias e='ghq list -p | p cd'
-alias show='git browse'
-alias ho='ghq list -p | p pushd >/dev/null; hub browse; popd >/dev/null'
 
 alias fe='nvim `git ls-files | peco`'
-alias srs="git status -s | grep spec | peco | awk 'match(\$0, /spec.*/) { print substr(\$0, RSTART, RLENGTH)}' | xargs bundle exec rspec"
-alias no='ghn list | peco | xargs open'
-
-# kill kav
-alias korosu='ps -ef | pgrep kav | sudo xargs kill -9'
 
 # HISTFILE
 HISTFILE=~/.zsh_history
@@ -206,3 +187,7 @@ typeset -U path PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/honda/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

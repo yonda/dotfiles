@@ -58,3 +58,4 @@ tags.lock
 .DS_Store
 
 urbanairship.log
+.irb_history
