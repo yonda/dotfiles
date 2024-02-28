@@ -43,6 +43,7 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias bo='bundle open'
 alias bu='bundle update'
+alias buc='bundle update --conservative'
 alias g='git'
 alias gl='git lo'
 
