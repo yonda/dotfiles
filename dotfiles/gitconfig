@@ -5,6 +5,8 @@
 	excludesfile = ~/.gitignore
 	pager = less
 	editor = nvim
+	ignorecase = false
+	quotepath = false
 [color]
 	ui = auto
 [push]
