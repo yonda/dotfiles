@@ -2,7 +2,7 @@ if [ -z $TMUX ]; then
   export PATH=/usr/local/bin:$PATH
   export PATH=/usr/local:$PATH
   export PATH=$HOME/.nodebrew/current/bin:$PATH
-  export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+  # export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
   # export NODE_PATH="$HOME/.nvm/versions/node/v6.7.0/lib/node_modules"
   # postgresql
   export PGDATA=/usr/local/var/postgres
@@ -13,7 +13,8 @@ fi
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="/opt/homebrew/opt/imagemagick@6/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
+export LIBRARY_PATH=$(brew --prefix zstd)/lib/
+
 typeset -U path PATH
 path=(
   /opt/homebrew/bin(N-/)
@@ -22,8 +23,6 @@ path=(
   /usr/local/sbin(N-/)
   /Library/Apple/usr/bin
 )
-
-eval "$(rbenv init - --no-rehash)"
 
 # nvm
 if [[ -s ~/.nvm/nvm.sh ]];
@@ -51,7 +50,7 @@ alias gl='git lo'
 
 alias vim=nvim
 
-alias rs='rails c'
+alias rs='./bin/rspec'
 
 # ## incremental
 alias e='ghq list -p | p cd'
@@ -192,3 +191,6 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/honda/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+#
+. "$HOME/.asdf/asdf.sh"
+

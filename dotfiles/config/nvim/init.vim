@@ -30,14 +30,14 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 
 "x キー削除でデフォルトレジスタに入れない
 nnoremap x "_x
 vnoremap x "_x
 
 au FileType ruby :set nowrap tabstop=2 tw=0 sw=2 expandtab commentstring=#\ %s
-let g:ruby_host_prog = '/Users/honda/.rbenv/shims/neovim-ruby-host'
+let g:ruby_host_prog = '/Users/honda.yohei/.asdf/shims/neovim-ruby-host'
 
 if &compatible
   set nocompatible

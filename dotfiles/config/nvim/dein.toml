@@ -100,15 +100,21 @@ hook_add = '''
   function s:Drailsgq(...)
     execute(':Denite -buffer-name=grep-buffer-rails-graphql file/rec -path=app/graphql')
   endfunction
+  noremap <Space>gg :Drailsgq<CR>
 
   " rails interactors dir
   command! -nargs=? Drailsinteractor call s:Drailsinteractor(<f-args>)
   function s:Drailsinteractor(...)
-    execute(':Denite -buffer-name=grep-buffer-rails-graphql file/rec -path=app/interactors')
+    execute(':Denite -buffer-name=grep-buffer-rails-interactors file/rec -path=app/interactors')
   endfunction
-
-  noremap <Space>q :Drailsgq<CR>
   noremap <Space>i :Drailsinteractor<CR>
+
+  " queries
+  command! -nargs=? Drailsquery call s:Drailsquery(<f-args>)
+  function s:Drailsquery(...)
+    execute(':Denite -buffer-name=grep-buffer-rails-queries file/rec -path=app/queries')
+  endfunction
+  noremap <Space>q :Drailsquery<CR>
 '''
 
 # 履歴
@@ -221,17 +227,11 @@ repo = 'udalov/kotlin-vim'
 repo = 'cespare/vim-toml'
 
 [[plugins]]
-repo = 'pangloss/vim-javascript'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'maxmellon/vim-jsx-pretty'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'alampros/vim-styled-jsx'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
 repo = 'moll/vim-node'
 on_ft = ['javascript']
+
+[[plugins]]
+repo = 'mogulla3/copy-file-path.nvim'
+hook_add = '''
+  map <Leader>c :CopyRelativeFilePath<CR>
+'''

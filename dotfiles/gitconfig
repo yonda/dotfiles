@@ -1,6 +1,6 @@
 [user]
 	name = yonda
-	email = honda@sansan.com
+	email = yohei1229@gmail.com
 [core]
 	excludesfile = ~/.gitignore
 	pager = less
@@ -37,6 +37,7 @@
 	ca = commit --amend -v
 	cm = commit -m
 	cif = commit --fixup
+  cd = !npm run commit
 
 	# grep
 	gl = grep --line-number --color
@@ -86,15 +87,13 @@
 	b = branch
 	bd = branch -D
 	rbd = push --delete origin
-	dmb = !git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d
-	md = merge develop
-
+	md = "!git branch --merged | egrep -v 'develop|master'|xargs git branch -d"
 
 	# hub
 	# browse github page
         o = !gh repo view --web
 	# ファイルを指定して開く
-	of = "!git rev-parse --abbrev-ref HEAD master develop| uniq | peco | xargs git rev-parse | xargs -I {} hub browse -- tree/{}/$1"
+	of = "!git rev-parse --abbrev-ref HEAD master develop| uniq | peco | xargs git rev-parse | xargs -I{} gh browse -b {}"
 	# wiki ページを開く
 	ow = browse -- wiki
 	# 引数がなければ PR 画面、あれば引数で渡された PR 番号の画面を開く
@@ -118,7 +117,7 @@
 	sbd = "!git branch | grep -v '*' |peco | xargs git branch -D"
 
 	# 選択して add
-	sa = "!git status -s | peco | cut -d' ' -f3 | xargs git add"
+  sa = "!git status -s | peco | awk -F' ' '{print $2}'| xargs git add"
 	# 選択して diff を表示する
 	sd = "!git status -s | grep 'M\\s' | peco | cut -d' ' -f3 | xargs git diff"
 
